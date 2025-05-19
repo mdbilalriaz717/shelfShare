@@ -1,0 +1,138 @@
+
+header {
+  background-color: #087386;
+  border: 1px solid #024a57;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  height: 80px; /* define height */
+  top: 0;
+  left: 0;
+}
+
+body {
+  padding-top: 80px; /* match header height */
+}
+
+.navbar-brand,
+.nav-link {
+  color: white !important;
+  font-size: 15px;
+  font-weight: bold;
+}
+.nav-link1{
+  color: #ff914d  !important ;
+  font-size: 15px;
+  font-weight: bold;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.nav-link:hover {
+  color: #ff914d !important;
+}
+
+.btn-custom {
+  background-color: #ff914d;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-outline-light 
+{
+    font-size: 18px;
+  font-weight: bold;
+}
+.btn-custom:hover {
+  background-color: #e27e3d;
+}
+
+.btn-outline-light:hover {
+  color: #ff914d;
+  border-color: #ff914d;
+}
+
+
+/* Fix navbar height */
+.navbar {
+    height: 80px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between; /* Align items on both sides */
+    align-items: center; /* Ensure content is vertically centered */
+  }
+  
+  /* Logo Styling */
+  .logo {
+    background-color: white;
+    border-radius: 8px;
+    width: auto;
+    height: 70px;
+    display: flex;                     /* Enable Flexbox */
+    align-items: center;              /* Vertically center */
+    justify-content: center;          /* Horizontally center */
+    padding: 5px;                     /* Optional: Add some padding */
+  }
+  .logo-img {
+    height: 150px;             /* Big enough visually */
+    max-height: 100%;          /* Prevents overflow */
+    width: auto;               /* Maintain aspect ratio */
+    object-fit: contain;
+    margin-top: 0;             /* Remove any margin to prevent shifting */
+    margin-bottom: -10;          /* Ensure no extra space below logo */
+  }
+
+
+
+
+/* Adjustments for devices with max-width of 992px (tablets & medium screens) */
+@media (max-width: 992px) {
+  .logo-img {
+margin-bottom: 0px;/* Slightly smaller for tablets */
+  }
+}
+
+/* Adjustments for devices with max-width of 768px (small tablets & large smartphones) */
+@media (max-width: 768px) {
+  .logo-img {
+    margin-bottom: 0px;/         /* Adjust logo size for smaller tablets */
+  }
+}
+
+/* Adjustments for devices with max-width of 576px (small screens like smartphones) */
+@media (max-width: 576px) {
+  .logo-img {
+    margin-bottom: 0px;/          /* Adjust logo size for small phones */
+  }
+}
+  
+  
+
+  
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: #087386;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0.5px solid #ff914d;
+    width: 100%; 
+    margin-left: 170px;
+  }
+
+  .navbar-collapse .nav-link {
+    color: white !important;
+  }
+
+  .navbar-collapse .nav-link:hover {
+    color: #ff914d !important;
+  }
+}
+
+
+

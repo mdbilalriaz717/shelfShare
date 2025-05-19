@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<section class="recently-listed py-5" style="margin-top: 0px; padding-top: 0px;">
+  <div class="container">
+
+    <!-- Filter Section -->
+    <div class="filter-section mb-4">
+      <h4 style="color: #087386">Filter Books</h4>
+      <form action="{% url 'search_books' %}" method="GET">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Search by keyword..." name="q" value="{{ query }}">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Search by Title" name="title" value="{{ title_query }}">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Search by Author" name="author" value="{{ author_query }}">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Search by Category" name="category" value="{{ category_query }}">
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary w-100">Apply Filter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    {% if is_search and query %}
+      <h3>Search Results for "{{ query }}"</h3>
+    {% elif is_search %}
+      <h3>Filtered Search Results</h3>
+    {% endif %}
+
+    {% if page_obj %}
+      <h2 class="text-center mb-4" style="color: #087386">Listed Books</h2>
+      <div class="row">
+        {% for book in page_obj %}
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="{{ book.book_cover_image.url }}" alt="Book Cover" class="card-img-top">
+            <div class="card-body" style="background-color: #087386;">
+              <h5 class="card-title" style="color: white">{{ book.book_title }}</h5>
+              <p class="card-text" style="color: white">{{ book.edition }}</p>
+              <p class="card-text" style="color: white">Posted by: {{ book.posted_by }}</p>
+              <a href="{% url 'book_details' book.book_id %}" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+          <p>No books available.</p>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No books found matching your search.</p>
+    {% endif %}
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example" style="margin-top: 25px;">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link"
+               href="?page={{ page_obj.previous_page_number }}&q={{ query }}&title={{ title_query }}&author={{ author_query }}&category={{ category_query }}">Previous</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link"
+                 href="?page={{ num }}&q={{ query }}&title={{ title_query }}&author={{ author_query }}&category={{ category_query }}">{{ num }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link"
+               href="?page={{ page_obj.next_page_number }}&q={{ query }}&title={{ title_query }}&author={{ author_query }}&category={{ category_query }}">Next</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+  </div>
+</section>
+
+{% endblock %}

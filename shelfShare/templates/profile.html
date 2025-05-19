@@ -1,0 +1,121 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<style>
+    a {
+      color:#087386;
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      color:#ff914d;
+      text-decoration: none;
+    }
+  </style>
+
+<!-- user profile section -->
+
+
+<div class="container mt-4 mb-5">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h2 >User Profile</h2>
+        <p >Welcome back, {{ user.first_name}} {{ user.last_name}}</p>
+    </div>
+
+    <div class="row">
+        <!-- Left Side - Profile Info -->
+        <div class="col-md-4">
+            <div class="card shadow-sm" style="background-color:#087386 ; color: #f8f9fa; ">
+                <div class="card-body text-center" >
+                    <div class="rounded-circle text-white d-flex justify-content-center align-items-center mx-auto" 
+                     style="width:100px; height:100px; background-color:#ff914d; font-size:30px;">
+                          {{ user.first_name|first|upper }}
+                    </div>
+                    <h4 class="card-title">{{ user.first_name}} {{ user.last_name}}</h4>
+                    <p class="card-text">{{ user.email}}</p>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'edit_profile' %}" class="btn btn-custom btn-sm mt-2">Edit Profile</a>
+                     {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-custom btn-sm mt-2">Edit Profile</a>
+                     {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - History and Change Password -->
+        <div class="col-md-8">
+            <div class="card shadow-sm" style="background-color:#087386 ; color: #f8f9fa;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Books Uploaded</h5>
+                    <ul class="list-group list-group-flush mb-4">
+                        {% if uploaded_books %}
+                            {% for book in uploaded_books %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'book_details' book.book_id %}">{{ book.book_title }}</a>
+                                    <small class="text-muted d-block">Book Id: {{ book.book_id }}</small>
+                                    <small class="text-muted d-block">Uploaded on: {{ book.posted_date|date:"d/m/Y" }}</small>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item text-muted">No uploaded books.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm" style="background-color:#087386 ; color: #f8f9fa;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Books Downloaded</h5>
+                    <ul class="list-group list-group-flush">
+                        {% if downloaded_books %}
+                            {% for book in downloaded_books %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'book_details' book.book_id %}">{{ book.book_title }}</a>
+                                    <small class="text-muted d-block">Author: {{ book.author_name }}</small>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item text-muted">No downloaded books.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-sm" style="background-color:#087386 ; color: #f8f9fa;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Change Password</h5>
+                    <form method="POST" action="{% url 'change_password' %}">
+                        {% csrf_token %} 
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}   
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="mb-3"> 
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password1" name="password1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="password2" name="password2" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">Update Password</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

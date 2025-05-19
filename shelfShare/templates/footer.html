@@ -1,0 +1,85 @@
+
+{% load static %}
+<!-- Footer Section -->
+<footer class="footer mt-5 text-white py-4">
+    <div class="container">
+      <div class="row">
+        <!-- About Section -->
+        <div class="col-md-3">
+          <h5 style="color:#ff914d ;">About Us</h5>
+          <p style="text-align: justify;">
+            ShelfShare is a streamlined platform developed by Gaming World, a software development company specializing in customized solutions tailored to client needs. <br>This portal is designed to make book sharing easy, efficient, and community-driven.
+            Gaming World is proud to bring innovative ideas like the Book Exchange Portal to life — empowering readers, building communities, and delivering smart software solutions.
+          </p>
+        </div>
+  
+        <!-- Contact Form -->
+        <div class="col-md-3">
+          <h5 style="color:#ff914d ;">Contact Us</h5>
+          <form  method="POST" action="{% url 'contact' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Your Message</label>
+              <textarea class="form-control" id="message" rows="3" name="message" placeholder="Enter your complaint" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom">Submit</button>
+          </form>
+        </div>
+  
+        <!-- Terms & Privacy Section -->
+        <div class="col-md-3">
+          <h5 style="color:#ff914d ;">Terms & Privacy</h5>
+          <p style="text-align: justify;">
+            By using ShelfShare, you agree to our terms: post only genuine books, respect other users, and ensure responsible use. <br><br>
+            We value your privacy — personal data is secure and never shared. Admins may monitor listings for safety and integrity.
+            © 2025 Gaming World
+          </p>
+        </div>
+  
+       <!-- Contact Info Section -->
+        <div class="col-md-3">
+            <h5 style="color:#ff914d ;">Contact Info</h5>
+            <p><b>Email:</b> gamingworldwithbilal@gmail.com</p>
+            <p><b>Phone:</b> +92 313 5920035</p>
+            <p style="text-align: justify;"><b>Address:</b> Gaming World Green City Town Bhalwal, Sargodha, Pakistan</p>
+        </div>
+  
+            <!-- Social Media Links Section -->
+        <div class="col-md-12 text-center mt-4">
+            <h4 style="padding-right: 10px; color:#ff914d ;">Follow Us</h4>
+            <div class="social-links">
+                <a href="https://www.linkedin.com" class="me-3" target="_blank">
+                    <img src="{% static 'assets/icons8-linkedin-50.png' %}" alt="LinkedIn" width="40" height="40">
+                </a>
+                <a href="https://www.facebook.com" class="me-3" target="_blank">
+                    <img src="{% static 'assets/icons8-facebook-50.png' %}" alt="Facebook" width="40" height="40">
+                </a>
+                <a href="https://www.instagram.com" class="me-3" target="_blank">
+                    <img src="{% static 'assets/icons8-instagram-50.png' %}" alt="Instagram" width="40" height="40">
+                </a>
+            </div>
+          
+  
+        <!-- Copyright -->
+        <div class="col-md-3 text-md-end">
+          <p class="mb-0">© 2025 GamingWorld_ShelfShare</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

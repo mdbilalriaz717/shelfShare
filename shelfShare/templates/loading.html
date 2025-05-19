@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShelfShare</title>
+  {% load static %}
+  <!-- Bootstrap 5 CSS -->
+   
+  <link rel="icon" href="{% static 'assets/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      background-color: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .logo {
+      width: auto;
+      height: 300px;
+
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #ff914d;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #087386;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // After 4 seconds, redirect to /home/
+    setTimeout(function() {
+        window.location.href = 'home/';
+    }, 4000); // 4000 milliseconds = 4 seconds
+    </script>
+
+  <!-- Logo -->
+  <img src="{% static 'assets/ShelfShareLogo.png' %}" alt="ShelfShare" class="logo">
+
+  <!-- Spinner -->
+  <div class="spinner"></div>
+
+  <!-- Loading Text -->
+  <div class="loading-text">Loading, please wait...</div>
+
+</body>
+</html>

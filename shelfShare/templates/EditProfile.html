@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShelfShare</title>
+  {% load static %}
+  <link rel="icon" href="{% static 'assets/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  
+  <style>
+    body {
+      background-color: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .edit-profile-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+    .edit-profile-card h3 {
+      color: #087386;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: block;
+      border: 3px solid #ff914d;
+    }
+    .btn-save {
+      background-color: #ff914d;
+      border: none;
+      color: white;
+    }
+    .btn-save:hover {
+      background-color: #e6782e;
+    }
+    .form-label {
+      color: #087386;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="edit-profile-card">
+    <h3>Edit Profile</h3>
+    <form  method="POST"  >
+      {% csrf_token %}
+      <!-- Profile Image -->
+      <div class="text-center">
+        <div class="rounded-circle text-white d-flex justify-content-center align-items-center mx-auto" 
+        style="width:100px; height:100px; background-color:#ff914d; font-size:30px;">
+           {{ user.first_name|first|upper }}
+        </div>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+        {% if message.tags == "success" %}
+          <script>
+            setTimeout(function() {
+              window.location.href = "{% url 'profile' %}";
+            }, 1500);
+          </script>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+
+      <div class="mb-3">
+        <label for="fname" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="f_name" name="first_name" value="{{ user.first_name }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="lname" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="l_name" name="last_name" value="{{ user.last_name }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" >
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-save">Save Changes</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

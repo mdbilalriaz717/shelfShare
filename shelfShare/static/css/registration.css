@@ -1,0 +1,75 @@
+
+.h-custom {
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .h-custom {
+    height: auto;
+  }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .btn-primary {
+    
+    background-color: #ff914d; /* background color */
+    color: white;               /* text color */
+    border: none;
+    border-radius: 8px;         /* border radius */
+    padding: 6px 24px;          /* padding */
+    width: 100%;               /* width */
+    font-size: 18px;             /* text size */
+    text-align: center;         /* smooth transition */
+
+  }
+  .btn-primary:hover{
+    background-color: #b95212;      /* background color on hover */
+    color: black;  
+  }
+
+  button.custom-button:hover {
+    background-color: #333;      /* background color on hover */
+    color: black;                /* text color on hover */
+  }
+
+  .custom-bg {
+    background: linear-gradient(rgba(163, 161, 161, 0.85), rgb(28, 150, 172)), 
+                url(../assets/books-library-shelves-lights.jpg);
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+  }
+
+.google-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.or {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 7px; 
+  }
+  
+  hr {
+    border: none;
+    border-top: 1px solid #000; /* Horizontal line style */
+    width: 180px; /* Adjust the width of the lines */
+  }
+  
+  .line-left {
+    margin-right: 10px; /* Space between the left line and the text */
+  }
+  
+  .line-right {
+    margin-left: 10px; /* Space between the right line and the text */
+  }
+  

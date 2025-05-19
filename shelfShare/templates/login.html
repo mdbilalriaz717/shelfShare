@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShalfShare</title>
+  
+  {% load static %}
+  {% load socialaccount %}
+  <link rel="icon" href="{% static 'assets/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+  <style>
+
+  .google-btn {
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 0px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+}
+
+.google-btn:hover {
+  background-color: #f1f1f1;
+}
+
+    .btn-primary {
+    
+      background-color: #ff914d; /* background color */
+      color: white;               /* text color */
+      border: none;
+      border-radius: 8px;         /* border radius */
+      padding: 6px 24px;          /* padding */
+      width: 100%;               /* width */
+      font-size: 18px;             /* text size */
+      text-align: center;         /* smooth transition */
+  
+    }
+    .btn-primary:hover{
+      background-color: #b95212;      /* background color on hover */
+      color: black;  
+    }
+  </style>
+</head>
+<body>
+
+    <section class="h-100 h-custom" style="background-color:  #087386;">
+        <div class="container py-5 h-100">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-10">
+              <div class="card rounded-3 shadow d-flex flex-md-row flex-column">
+                
+                <!-- Logo Column -->
+                
+      
+                <!-- Registration Form Column -->
+                <div class="col-md-6 p-4 p-md-5">
+                  <h3 class="mb-4 pb-2" style="color: #ff914d;">Sign In</h3>
+      
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+                        {{ message }}
+                      </div>
+                      {% if message.tags == 'success' %}
+                      <script>
+                          setTimeout(function(){
+                              window.location.href = "{% url 'home' %}";
+                          }, 1500);
+                          
+                      </script>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                    
+                    <div class="mb-3">
+                      <label for="email" class="form-label" style="color: #ff914d">Email</label>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email"  required/>
+                    </div>
+                 
+                    <div class="mb-3">
+                      <label for="password" class="form-label" style="color: #ff914d">Password</label>
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Enter the Password" required/>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                      Sign In
+                    </button>
+                     
+
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <a href="{% url 'password_reset' %}" style="color: #ff914d;">Forgot password?</a>
+                      </div>
+                      <p class="mb-0 text-muted">
+                        Don't have an account? 
+                        <a href="{% url 'register' %}" class="fw-bold" style="color: #ff914d;"><u>Sign Up</u></a>
+                      </p>
+                    </div>
+                <div class="or">
+                   <hr class="line-left">
+                    <h6>OR</h6>
+                   <hr class="line-right">
+                </div>
+                    
+                
+                <div class="google-container">
+                  <a href="{% provider_login_url 'google' %}" class="google-btn" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background-color: white; border: 1px solid #ccc; border-radius: 8px; font-weight: bold;">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+                    <span>Continue with Google</span>
+                  </a>
+                </div>
+                
+                 
+               
+                  </form>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center p-4 bg-light custom-bg">
+                  <img src="{% static 'assets/ShelfShareLogo.png' %}" alt="App Logo" class="img-fluid" style="max-height: 300px;" />
+              </div>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+

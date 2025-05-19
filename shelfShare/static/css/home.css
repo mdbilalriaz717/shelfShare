@@ -1,0 +1,144 @@
+
+/* hero section */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+  }
+  
+  
+  .hero-section h1, 
+  .hero-section p {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+ 
+  .custom-btn:hover{
+    color: #ff914d;
+    background-color: #087386;
+  }
+  
+ 
+  .custom-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 60px;
+    min-width: 220px;
+    justify-content: center;
+    background-color: #fff;
+    color: #087386;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .custom-btn img.btn-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+
+
+  /* highlighted features code  */
+  .features {
+    background-color: #f9f9f9;
+  }
+  
+  .feature-card {
+    background-color:#087386;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .feature-icon {
+    width: 60px; /* Adjust size of the icons */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+ 
+  
+
+
+  /* listed Books SECTION */
+  .recently-listed {
+    background-color: #f9f9f9;
+ 
+  }
+  
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-img-top {
+    height: 200px; /* Set height for the thumbnail images */
+    object-fit: cover;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 14px;
+  }
+  
+ 
+  
+  .filter-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  
+  
+  .btn-primary {
+    background-color: #ff914d;
+    border: none;
+    padding: 8px 20px;
+  }
+  
+  .btn-primary:hover {
+    color: #087386;
+    background-color:#ff914d ;
+  }
+  
+
+  /* pagination */
+  /* Text color for the pagination links */
+.pagination .page-link {
+    color: #ff914d;
+  }
+  
+  /* Color for the selected (active) page item */
+  .pagination .page-item.active .page-link {
+    background-color: #087386;
+    border-color: #087386;
+    color: #fff; /* White text color for the active item */
+  }
+  
+  /* Hover effect for pagination links */
+  .pagination .page-link:hover {
+    color: #fff; /* White text color on hover */
+    background-color: #087386; /* Background color for hover */
+    border-color: #087386; /* Border color on hover */
+  }
+  
+  /* Disabled page link style */
+  .pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Greyed out color for disabled link */
+    background-color: transparent;
+    border-color: transparent;
+  }
+  

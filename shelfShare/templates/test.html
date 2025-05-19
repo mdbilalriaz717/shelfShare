@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="color: #087386; font-size: xx-large; margin: 20px; padding: 70px; align-items: center; justify-content: center;">
+    {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

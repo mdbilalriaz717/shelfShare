@@ -1,0 +1,28 @@
+/* Footer Styling */
+.footer {
+    background-color: #087386;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #ff914d; /* Hover effect for links */
+  }
+  
+  .btn-custom {
+    background-color: #ff914d;
+    color: white;
+    border: none;
+  }
+  
+  .btn-custom:hover {
+    background-color: #e27e3d;
+  }
+  

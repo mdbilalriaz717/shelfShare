@@ -1,0 +1,168 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Post / Edit Book -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      
+      <div class="d-flex justify-content-center my-4">
+        <a href="{% url 'post_book' %}" class="btn btn-warning" style="background-color: #087386; border: none; color: white; ">
+            Post Book
+        </a>
+        {% if book and book.book_id %}
+        <a href="{% url 'edit_book' book.book_id %}" class="btn btn-warning" style="background-color: #ff914d; border: none;  color: white; margin-left: 10px;">
+            Edit Book
+        </a>
+         {% endif %} 
+         {% if user.is_superuser %}
+        <a href="{% url 'pending_books' %}" class="btn btn-warning" style="background-color: #18c726; border: none; color: white; margin-left: 10px;">
+            Approve Books
+        </a>
+         {% endif %}   
+
+    </div>
+      
+      <h2 class="text-center mb-4" style="color: #087386;">
+        {% if edit %} Edit Book {% else %} Post a Book {% endif %}
+      </h2>
+
+      <div class="form-section" style="background-color: #087386; padding: 2rem; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% if messages %}
+          <div class="mb-3">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="book_id" class="form-label" style="color: #ff914d; font-weight: bold;">Book Id</label>
+              <input type="text" class="form-control" id="book_id" name="book_id" value="{{ form.book_id.value |default_if_none:''}}" placeholder="e.g., CS1003" required />
+              {% for error in form.book_id.errors %}
+                <div class="text-danger">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="col-md-6">
+              <label for="title" class="form-label" style="color: #ff914d; font-weight: bold;">Book Title</label>
+              <input type="text" class="form-control" id="title" name="book_title" value="{{ form.book_title.value|default_if_none:'' }}" placeholder="e.g., The Great Gatsby" required />
+            </div>
+            <div class="col-md-6">
+              <label for="edition" class="form-label" style="color: #ff914d; font-weight: bold;">Edition</label>
+              <input type="text" class="form-control" id="edition" name="edition" value="{{ form.edition.value|default_if_none:'' }}" placeholder="e.g., 2nd Edition" required />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="author" class="form-label" style="color: #ff914d; font-weight: bold;">Author Name</label>
+              <input type="text" class="form-control" id="author" name="author_name" value="{{ form.author_name.value|default_if_none:'' }}" placeholder="e.g., F. Scott Fitzgerald" required />
+            </div>
+            <div class="col-md-6">
+              <label for="year" class="form-label" style="color: #ff914d; font-weight: bold;">Publication Year</label>
+              <input type="number" class="form-control" id="year" name="publication_year" value="{{ form.publication_year.value|default_if_none:'' }}" placeholder="e.g., 1925" min="1500" max="2099" required />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="category" class="form-label" style="color: #ff914d; font-weight: bold;">Book Category</label>
+            <select class="form-select" id="category" name="category" required onchange="toggleCustomCategory()">
+              <option value="">-- Select Category --</option>
+              {% for cat in categories %}
+                <option value="{{ cat }}" {% if form.category.value == cat %}selected{% endif %}>{{ cat }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" class="form-control mt-2 {% if form.category.value != 'Other' %}d-none{% endif %}" id="custom_category" name="custom_category" placeholder="Enter custom category" value="{{ form.custom_category.value|default_if_none:'' }}">
+          </div>
+
+          <div class="mb-3">
+            <label for="condition" class="form-label" style="color: #ff914d; font-weight: bold;">Book Condition</label>
+            <select class="form-select" id="condition" name="book_condition" required>
+              <option value="">-- Select Condition --</option>
+              {% for cond in conditions %}
+                <option value="{{ cond.0 }}" {% if form.book_condition.value == cond.0 %}selected{% endif %}>{{ cond.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label" style="color: #ff914d; font-weight: bold;">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Brief description of the book..." required>{{ form.description.value|default_if_none:'' }}</textarea>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="cover_image" class="form-label" style="color: #ff914d; font-weight: bold;">Book Cover Image</label>
+              <input type="file" class="form-control" id="cover_image" name="book_cover_image" accept="image/*" />
+              {% if book and book.book_cover_image %}
+                <small style="color:white;">Current: {{ book.book_cover_image.name }}</small>
+              {% endif %}
+            </div>
+            <div class="col-md-6">
+              <label for="book_file" class="form-label" style="color: #ff914d; font-weight: bold;">Upload Book File (PDF, DOC, DOCX)</label>
+              <input type="file" class="form-control" id="book_file" name="book_document" accept=".pdf, .doc, .docx" />
+              {% if book and book.book_document %}
+                <small style="color:white;">Current: {{ book.book_document.name }}</small>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="contact" class="form-label" style="color: #ff914d; font-weight: bold;">Contact Preference</label>
+            <input type="text" class="form-control" id="contact" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter Email (Optional)" />
+          </div>
+
+          <div class="d-grid gap-2">
+            {% if user.is_authenticated %}
+              <button type="submit" class="btn btn-custom" style="background-color: #ff914d; color: white;">
+                {% if edit %}Update Book{% else %}Post Book{% endif %}
+              </button>
+            {% else %}
+              <a href="{% url 'login' %}" class="btn btn-custom" style="background-color: #ff914d; color: white;">
+                Please log in to post or update a book
+              </a>
+            {% endif %}
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleCustomCategory() {
+  var categorySelect = document.getElementById("category");
+  var customCategoryInput = document.getElementById("custom_category");
+
+  if (categorySelect.value.toLowerCase() === "other") {
+    customCategoryInput.classList.remove("d-none");
+    customCategoryInput.required = true;
+  } else {
+    customCategoryInput.classList.add("d-none");
+    customCategoryInput.required = false;
+    customCategoryInput.value = ''; // clear input
+  }
+}
+</script>
+
+  
+
+  
+  
+  {%  endblock %}
+  
+  
+  
+  
+  
+  
+

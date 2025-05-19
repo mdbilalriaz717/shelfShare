@@ -1,0 +1,13 @@
+<!-- templates/books/pending_books.html -->
+<h1>Pending Books for Approval</h1>
+
+<ul>
+  {% for book in books %}
+    <li>
+      {{ book.book_title }} by {{ book.author_name }}
+      <a href="{% url 'approve_book' book.book_id %}">Approve</a>
+    </li>
+  {% empty %}
+    <li>No books pending approval.</li>
+  {% endfor %}
+</ul>
