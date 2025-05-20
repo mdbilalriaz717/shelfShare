@@ -105,21 +105,26 @@ WSGI_APPLICATION = 'shelfShare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+DATABASE_URL = config('DATABASE_URL', default=None)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ShelfShare',
-        'USER': 'postgres',
-        'PASSWORD': 'Mbilal123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
     }
-}
+else:
+    # fallback for local dev
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ShelfShare',
+            'USER': 'postgres',
+            'PASSWORD': 'Mbilal123',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
-DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
-}
+
 
 
 
